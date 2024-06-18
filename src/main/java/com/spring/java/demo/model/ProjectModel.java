@@ -9,9 +9,11 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User_Details {
+public class ProjectModel {
     private int id;
-    private int profileID;
-    private Date dateOfBirth;
-    private int genderId;
+    private String projectName;
+    private String description;
+    private Date startDate;
+    private Date endDate;
+    private int statusID;
 }

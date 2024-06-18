@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Profile {
+public class AddressModel {
     private int id;
+    private String addressName;
+    private int countryId;
+    private int cityId;
 }

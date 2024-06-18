@@ -1,8 +1,8 @@
 package com.spring.java.demo.controllers;
 
 import com.spring.java.demo.auth.JwtUtil;
-import com.spring.java.demo.model.User;
-import com.spring.java.demo.repositories.UserRepository;
+import com.spring.java.demo.model.UserModel;
+import com.spring.java.demo.repositories.UserRepo;
 import com.spring.java.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
-    private final UserRepository userRepository;
+    private final UserRepo userRepository;
 
     @Autowired
     private UserService userService;
@@ -29,7 +29,7 @@ public class AuthController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserRepository userRepository) {
+    public AuthController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserRepo userRepository) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
         this.userRepository = userRepository;
@@ -42,12 +42,12 @@ public class AuthController {
 
     @GetMapping("/registration")
     public String getRegistrationPage(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UserModel());
         return "registration_page";
     }
 
     @PostMapping("/register")
-    public String register(User user) {
+    public String register(UserModel user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles("USER");
         userService.createUser(user);

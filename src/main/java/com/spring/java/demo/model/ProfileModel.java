@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Company {
+public class ProfileModel {
     private int id;
-    private String companyName;
-    private String description;
 }

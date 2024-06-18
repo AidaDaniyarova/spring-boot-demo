@@ -14,11 +14,13 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig  {
+public class SecurityConfig {
     private final CustomUserDetailsService userDetailsService;
+
     public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
         this.userDetailsService = customUserDetailsService;
     }
+
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder)
             throws Exception {
@@ -31,7 +33,7 @@ public class SecurityConfig  {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .requestMatchers( "/**", "/rest/auth/login", "/rest/auth/registration").permitAll()
+                .requestMatchers("/**", "/rest/auth/login", "/rest/auth/registration").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
@@ -40,8 +42,8 @@ public class SecurityConfig  {
     }
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
-        return  new BCryptPasswordEncoder();
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
 

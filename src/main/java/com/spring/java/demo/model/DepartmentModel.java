@@ -7,8 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Roles {
+public class DepartmentModel {
     private int id;
-    private String roleName;
-    private String salary;
+    private String departmentName;
+    private String description;
+    private int employeeNumber;
+    private int companyId;
+
 }

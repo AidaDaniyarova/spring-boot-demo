@@ -4,18 +4,16 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.Collections;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "USERS")
-public class User {
+public class UserModel {
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "EMAIL")
     private String email;
@@ -31,11 +29,12 @@ public class User {
     @Column(name = "ROLE")
     private String roles;
 
-    public User(String email, String password) {
+    public UserModel(String email, String password) {
         this.email = email;
         this.password = password;
     }
-    public User(String email, String password, String firstName, String lastName, String phoneNumber, String roles) {
+
+    public UserModel(String email, String password, String firstName, String lastName, String phoneNumber, String roles) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;

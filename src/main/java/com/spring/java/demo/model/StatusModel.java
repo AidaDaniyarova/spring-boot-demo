@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HelloRes {
-    private String message;
-    private String time;
+public class StatusModel {
+    private int id;
+    private String statusName;
 }

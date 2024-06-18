@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class City {
-    private int id;
-    public String cityName;
-    private int countryID;
+public class MessageModel {
+    private String message;
+    private String time;
 }

@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Country {
+public class RolesModel {
     private int id;
-    private String countryName;
+    private String roleName;
+    private String salary;
 }

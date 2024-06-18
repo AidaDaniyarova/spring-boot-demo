@@ -1,6 +1,6 @@
 package com.spring.java.demo.controllers;
 
-import com.spring.java.demo.model.HelloRes;
+import com.spring.java.demo.model.MessageModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +15,11 @@ import java.util.Date;
 public class GreetingDateController {
     @ResponseBody
     @RequestMapping(value = "",method = RequestMethod.GET)
-    public ResponseEntity<HelloRes>  hello(){
+    public ResponseEntity<MessageModel>  hello(){
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
 
-        HelloRes helloRes = new HelloRes();
+        MessageModel helloRes = new MessageModel();
         helloRes.setMessage("Hello user");
         helloRes.setTime(timestamp.toString());
 

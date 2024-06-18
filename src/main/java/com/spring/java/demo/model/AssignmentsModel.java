@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Departments {
+public class AssignmentsModel {
     private int id;
-    private String departmentName;
-    private String description;
-    private int employeeNumber;
-    private int companyId;
-
+    private int projectID;
+    private String task;
+    private boolean isFinished;
+    private int workedHours;
 }

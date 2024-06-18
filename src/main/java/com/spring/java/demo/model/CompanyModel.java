@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Status {
+public class CompanyModel {
     private int id;
-    private String statusName;
+    private String companyName;
+    private String description;
 }

@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Assignments {
+public class CityModel {
     private int id;
-    private int projectID;
-    private String task;
-    private boolean isFinished;
-    private int workedHours;
+    public String cityName;
+    private int countryID;
 }

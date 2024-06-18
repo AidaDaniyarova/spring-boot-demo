@@ -4,12 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address {
+public class UserDetailsModel {
     private int id;
-    private String addressName;
-    private int countryId;
-    private int cityId;
+    private int profileID;
+    private Date dateOfBirth;
+    private int genderId;
 }
