@@ -29,11 +29,6 @@ public class UserModel {
     @Column(name = "ROLE")
     private String roles;
 
-    public UserModel(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
     public UserModel(String email, String password, String firstName, String lastName, String phoneNumber, String roles) {
         this.email = email;
         this.password = password;
