@@ -23,19 +23,19 @@ public class ProjectController {
         return "projects";
     }
 
-    @GetMapping("/create")
+    @GetMapping("/projects/create")
     public String getCreateProjectPage(Model model) {
         model.addAttribute("newProject", new ProjectModel());
         return "create_project_page";
     }
 
-    @PostMapping("/createProject")
+    @PostMapping("/projects/createProject")
     public String createProject(@ModelAttribute ProjectModel project) {
         projectService.createProject(project);
         return "redirect:/rest/admin/projects";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/projects/edit/{id}")
     public String getEditProjectPage(Model model, @PathVariable Long id) {
         ProjectModel project = projectService.getProjectById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid project ID: " + id));
@@ -43,13 +43,13 @@ public class ProjectController {
         return "edit_project_page";
     }
 
-    @PostMapping("/editProject")
+    @PostMapping("/projects/editProject")
     public String editProject(@ModelAttribute ProjectModel project) {
         projectService.updateProject(project.getId(), project);
         return "redirect:/rest/admin/projects";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/projects/delete/{id}")
     public String deleteProject(@PathVariable Long id) {
         projectService.deleteProject(id);
         return "redirect:/rest/admin/projects";

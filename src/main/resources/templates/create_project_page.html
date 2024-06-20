@@ -8,7 +8,7 @@
 <body>
 <div class="container">
     <h1>Create Project</h1>
-    <form th:action="@{/rest/admin/createProject}" th:object="${newProject}" method="post">
+    <form th:action="@{/rest/admin/projects/createProject}" th:object="${newProject}" method="post">
         <div class="input-box">
             <label for="projectName" class="details">Project Name:</label>
             <input type="text" id="projectName" th:field="*{projectName}" class="input-field" required>
