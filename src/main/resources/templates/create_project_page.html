@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Create Project</h1>
+    <form th:action="@{/rest/admin/createProject}" th:object="${newProject}" method="post">
+        <div class="input-box">
+            <label for="projectName" class="details">Project Name:</label>
+            <input type="text" id="projectName" th:field="*{projectName}" class="input-field" required>
+        </div>
+        <div class="input-box">
+            <label for="description" class="details">Description:</label>
+            <textarea id="description" th:field="*{description}" class="input-field" required></textarea>
+        </div>
+        <div class="input-box">
+            <label for="startDate" class="details">Start Date:</label>
+            <input type="text" id="startDate" th:field="*{startDate}" placeholder="dd.MM.yyyy" class="input-field" required>
+        </div>
+        <div class="input-box">
+            <label for="endDate" class="details">End Date:</label>
+            <input type="text" id="endDate" th:field="*{endDate}" placeholder="dd.MM.yyyy" class="input-field" required>
+        </div>
+        <div class="input-box">
+            <label for="statusID" class="details">Status ID:</label>
+            <input type="number" id="statusID" th:field="*{statusID}" class="input-field" required>
+        </div>
+        <div class="button">
+            <button type="submit">Create</button>
+        </div>
+    </form>
+</div>
+</body>
+<style>
+    /* Googlefont Poppins CDN Link */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+    .container{
+        max-width: 1600px;
+        width: 80%;
+        background-color: #fff;
+        padding: 25px 30px;
+        border-radius: 5px;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    }
+    .container .title{
+        font-size: 25px;
+        font-weight: 500;
+        position: relative;
+    }
+    .container .title::before{
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 30px;
+        border-radius: 5px;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    }
+    .container form .input-box{
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    form .input-box .details{
+        display: block;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+    .input-box input, .input-box textarea{
+        height: 45px;
+        width: 100%;
+        outline: none;
+        font-size: 16px;
+        border-radius: 5px;
+        padding-left: 15px;
+        border: 1px solid #ccc;
+        border-bottom-width: 2px;
+        transition: all 0.4s ease;
+    }
+    .input-box input:focus, .input-box textarea:focus,
+    .input-box input:valid, .input-box textarea:valid{
+        border-color: #9b59b6;
+    }
+    form .button{
+        height: 45px;
+        margin: 35px 0;
+    }
+    form .button button{
+        height: 100%;
+        width: 100%;
+        border-radius: 5px;
+        border: none;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    }
+    form .button button:hover{
+        background: linear-gradient(10deg, #71b7e6, #9b59b6);
+    }
+</style>
+</html>

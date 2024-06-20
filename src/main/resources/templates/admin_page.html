@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<!-- Coding by CodingNepal | www.codingnepalweb.com -->
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title> Responsiive Admin Dashboard | CodingLab </title>
+    <title> Admin Panel</title>
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +11,7 @@
 <div class="sidebar">
     <div class="logo-details">
         <i class='bx bxl-c-plus-plus'></i>
-        <span class="logo_name">CodingLab</span>
+        <span class="logo_name">Admin Panel</span>
     </div>
     <ul class="nav-links">
         <li>
@@ -22,9 +21,9 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="/rest/admin/projects">
                 <i class='bx bx-box' ></i>
-                <span class="links_name">Product</span>
+                <span class="links_name">Projects</span>
             </a>
         </li>
         <li>
@@ -42,13 +41,13 @@
         <li>
             <a href="#">
                 <i class='bx bx-coin-stack' ></i>
-                <span class="links_name">Stock</span>
+                <span class="links_name">Assignments</span>
             </a>
         </li>
         <li>
             <a href="#">
                 <i class='bx bx-book-alt' ></i>
-                <span class="links_name">Total order</span>
+                <span class="links_name">Employee</span>
             </a>
         </li>
         <li>
@@ -95,7 +94,7 @@
         </div>
         <div class="profile-details">
             <img src="images/profile.jpg" alt="">
-            <span class="admin_name">Prem Shahi</span>
+            <span class="admin_name">Admin Name</span>
             <i class='bx bx-chevron-down' ></i>
         </div>
     </nav>
@@ -426,7 +425,7 @@
         text-align: center;
         color: #fff;
         font-size: 22px;
-        transition: all 0.4 ease;
+        transition: all 0.4s ease;
     }
     .home-section nav .profile-details{
         display: flex;
@@ -572,7 +571,6 @@
     .sales-boxes .sales-details li a{
         font-size: 18px;
         color: #333;
-        font-size: 400;
         text-decoration: none;
     }
     .sales-boxes .box .button{

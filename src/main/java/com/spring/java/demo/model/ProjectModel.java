@@ -11,21 +11,28 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "PROJECT")
+@Table(name = "PROJECTS")
 public class ProjectModel {
     @Id
-    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "PROJECT_NAME")
+    @Column(name = "ID")
+    private Long id;
+
+    @Column(name = "PROJECT_NAME", nullable = false)
     private String projectName;
-    @Column(name = "DESCRIPTION")
+
+    @Column(name = "DESCRIPTION", nullable = false)
     private String description;
-    @Column(name = "START_DATE")
+
+    @Column(name = "START_DATE", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date startDate;
-    @Column(name = "END_DATE")
+
+    @Column(name = "END_DATE", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date endDate;
-    @Column(name = "STATUS_ID")
+
+    @Column(name = "STATUS_ID", nullable = false)
     private int statusID;
 
     public ProjectModel(String projectName, String description, Date startDate, Date endDate, int statusID) {
