@@ -14,7 +14,7 @@ public class RolesModel {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Column(name = "ROLE_NAME")
     private String roleName;
     @Column(name = "SALARY")

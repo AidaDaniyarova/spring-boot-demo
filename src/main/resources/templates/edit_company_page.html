@@ -2,35 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create Project</title>
+    <title>Edit Project</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
-    <h1>Create Project</h1>
-    <form th:action="@{/rest/admin/projects/createProject}" th:object="${newProject}" method="post">
+    <h1>Edit Project</h1>
+    <form th:action="@{/rest/admin/company/editCompany}" th:object="${companyToEdit}" method="post">
+        <input type="hidden" th:field="*{id}">
         <div class="input-box">
-            <label for="projectName" class="details">Project Name:</label>
-            <input type="text" id="projectName" th:field="*{projectName}" class="input-field" required>
+            <label for="task" class="details">Company Name:</label>
+            <input type="text" id="task" th:field="*{companyName}" class="input-field" required>
         </div>
         <div class="input-box">
-            <label for="description" class="details">Description:</label>
-            <textarea id="description" th:field="*{description}" class="input-field" required></textarea>
-        </div>
-        <div class="input-box">
-            <label for="startDate" class="details">Start Date:</label>
-            <input type="text" id="startDate" th:field="*{startDate}" placeholder="dd.MM.yyyy" class="input-field" required>
-        </div>
-        <div class="input-box">
-            <label for="endDate" class="details">End Date:</label>
-            <input type="text" id="endDate" th:field="*{endDate}" placeholder="dd.MM.yyyy" class="input-field" required>
-        </div>
-        <div class="input-box">
-            <label for="status" class="details">Status ID:</label>
-            <input type="number" id="status" th:field="*{status.id}" class="input-field" required>
+            <label for="workedHours" class="details">Description:</label>
+            <input type="text" id="workedHours" th:field="*{description}" class="input-field" required>
         </div>
         <div class="button">
-            <button type="submit">Create</button>
+            <button type="submit">Save Changes</button>
         </div>
     </form>
 </div>
@@ -45,8 +34,8 @@
         font-family: 'Poppins', sans-serif;
     }
     .container{
-        max-width: 1600px;
-        width: 80%;
+        max-width: 700px;
+        width: 100%;
         background-color: #fff;
         padding: 25px 30px;
         border-radius: 5px;

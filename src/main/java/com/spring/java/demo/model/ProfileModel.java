@@ -1,36 +1,48 @@
 package com.spring.java.demo.model;
 
+import com.spring.java.demo.services.AddressService;
+import com.spring.java.demo.services.AssignmentService;
+import com.spring.java.demo.services.DepartmentService;
+import com.spring.java.demo.services.RolesService;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "PROFILE")
+@Table(name = "PROFILES")
 public class ProfileModel {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "profile_seq")
+    @SequenceGenerator(name = "profile_seq", sequenceName = "profiles_id_seq", allocationSize = 1)
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "USER_ID")
-    private int userId;
-    @Column(name = "ADDRESS_ID")
-    private int addressId;
-    @Column(name = "ROLE_ID")
-    private int roleId;
-    @Column(name = "ASSIGNMENT_ID")
-    private int assignmentId;
-    @Column(name = "DEPARTMENT_ID")
-    private int departmentId;
+    private Long id;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "USER_ID", nullable = false)
+    private UserModel user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ADDRESS_ID")
+    private AddressModel address;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ROLE_ID")
+    private RolesModel role;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ASSIGNMENT_ID")
+    private AssignmentsModel assignment;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "DEPARTMENT_ID")
+    private DepartmentModel department;
 
-    public ProfileModel(int userId, int addressId, int roleId, int assignmentId, int departmentId) {
-        this.userId = userId;
-        this.addressId = addressId;
-        this.roleId = roleId;
-        this.assignmentId = assignmentId;
-        this.departmentId = departmentId;
+
+    public ProfileModel(UserModel user, AddressModel address, RolesModel role, AssignmentsModel assignment, DepartmentModel department) {
+        this.user = user;
+        this.address = address;
+        this.role = role;
+        this.assignment = assignment;
+        this.department = department;
     }
+
 }
+

@@ -14,20 +14,20 @@ public class AssignmentsModel {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "PROJECT_ID")
-    private int projectID;
+    private Long id;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "PROJECT_ID", nullable = false)
+    private ProjectModel project;
     @Column(name = "TASK")
     private String task;
     @Column(name = "IS_FINISHED")
-    private boolean isFinished;
+    private boolean finished;
     @Column(name = "WORKED_HOURS")
     private int workedHours;
-
-    public AssignmentsModel(int projectID, String task, boolean isFinished, int workedHours) {
-        this.projectID = projectID;
+    public AssignmentsModel(ProjectModel project, String task, boolean finished, int workedHours) {
+        this.project = project;
         this.task = task;
-        this.isFinished = isFinished;
+        this.finished = finished;
         this.workedHours = workedHours;
     }
 }

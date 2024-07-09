@@ -31,15 +31,15 @@ public class ProjectModel {
     @Column(name = "END_DATE", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date endDate;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "STATUS_ID", nullable = false)
+    private StatusModel status;
 
-    @Column(name = "STATUS_ID", nullable = false)
-    private int statusID;
-
-    public ProjectModel(String projectName, String description, Date startDate, Date endDate, int statusID) {
+    public ProjectModel(String projectName, String description, Date startDate, Date endDate, StatusModel status) {
         this.projectName = projectName;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.statusID = statusID;
+        this.status = status;
     }
 }

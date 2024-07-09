@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProfileRepo extends JpaRepository<ProfileModel, Long> {
-    @Query("SELECT u FROM ProfileModel u WHERE u.userId = :userId")
-    ProfileModel findProfileByUserId(@Param("userId") int userId);
+    @Query("SELECT u FROM ProfileModel u WHERE u.user.id = :userId")
+    ProfileModel findProfileByUserId(@Param("userId") Long userId);
 }

@@ -20,8 +20,8 @@ public class GreetingDateController {
         Timestamp timestamp = new Timestamp(date.getTime());
 
         MessageModel helloRes = new MessageModel();
-        helloRes.setMessage("Hello user");
-        helloRes.setTime(timestamp.toString());
+        /*helloRes.setMessage("Hello user");
+        helloRes.setTime(timestamp.toString());*/
 
         return ResponseEntity.ok(helloRes);
     }

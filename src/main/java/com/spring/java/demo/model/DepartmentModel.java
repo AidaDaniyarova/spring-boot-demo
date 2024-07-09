@@ -14,19 +14,20 @@ public class DepartmentModel {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Column(name = "DEPARTMENT_NAME")
     private String departmentName;
     @Column(name = "DESCRIPTION")
     private String description;
     @Column(name = "EMPLOYEE_NUMBER")
     private int employeeNumber;
-    @Column(name = "COMPANY_ID")
-    private int companyId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "COMPANY_ID", nullable = false)
+    private CompanyModel company;
 
-    public DepartmentModel(String departmentName, String description, int companyId) {
+    public DepartmentModel(String departmentName, String description, CompanyModel company) {
         this.departmentName = departmentName;
         this.description = description;
-        this.companyId = companyId;
+        this.company = company;
     }
 }

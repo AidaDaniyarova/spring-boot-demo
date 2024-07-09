@@ -17,11 +17,12 @@ public class CityModel {
     private int id;
     @Column(name = "CITY_NAME")
     public String cityName;
-    @Column(name = "COUNTRY_ID")
-    private int countryID;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "COUNTRY_ID", nullable = false)
+    private CountryModel country;
 
-    public CityModel(String cityName, int countryID) {
+    public CityModel(String cityName, CountryModel country) {
         this.cityName = cityName;
-        this.countryID = countryID;
+        this.country = country;
     }
 }

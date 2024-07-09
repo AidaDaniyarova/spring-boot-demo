@@ -14,17 +14,19 @@ public class AddressModel {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Column(name = "ADDRESS_NAME")
     private String addressName;
-    @Column(name = "COUNTRY_ID")
-    private int countryId;
-    @Column(name = "CITY_ID")
-    private int cityId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "COUNTRY_ID", nullable = false)
+    private CountryModel country;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "CITY_ID", nullable = false)
+    private CityModel city;
 
-    public AddressModel(String addressName, int countryId, int cityId){
+    public AddressModel(String addressName, CountryModel country, CityModel city){
         this.addressName = addressName;
-        this.countryId = countryId;
-        this.countryId = cityId;
+        this.country = country;
+        this.city = city;
     }
 }

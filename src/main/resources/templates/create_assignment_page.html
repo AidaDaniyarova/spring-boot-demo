@@ -2,32 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create Project</title>
+    <title>Create Assignment</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
-    <h1>Create Project</h1>
-    <form th:action="@{/rest/admin/projects/createProject}" th:object="${newProject}" method="post">
+    <h1>Create Assignment</h1>
+    <form th:action="@{/rest/admin/assignments/createAssignment}" th:object="${newAssignment}" method="post">
         <div class="input-box">
-            <label for="projectName" class="details">Project Name:</label>
-            <input type="text" id="projectName" th:field="*{projectName}" class="input-field" required>
+            <label for="task" class="details">Task Name:</label>
+            <input type="text" id="task" th:field="*{task}" class="input-field" required>
         </div>
         <div class="input-box">
-            <label for="description" class="details">Description:</label>
-            <textarea id="description" th:field="*{description}" class="input-field" required></textarea>
+            <label for="workedHours" class="details">Worked hours:</label>
+            <input type="number" id="workedHours" th:field="*{workedHours}" class="input-field" required>
         </div>
         <div class="input-box">
-            <label for="startDate" class="details">Start Date:</label>
-            <input type="text" id="startDate" th:field="*{startDate}" placeholder="dd.MM.yyyy" class="input-field" required>
+            <label for="finished" class="details">Finished:</label>
+            <input type="checkbox" id="finished" th:field="*{finished}" class="input-field">
         </div>
         <div class="input-box">
-            <label for="endDate" class="details">End Date:</label>
-            <input type="text" id="endDate" th:field="*{endDate}" placeholder="dd.MM.yyyy" class="input-field" required>
-        </div>
-        <div class="input-box">
-            <label for="status" class="details">Status ID:</label>
-            <input type="number" id="status" th:field="*{status.id}" class="input-field" required>
+            <label for="project" class="details">Project ID:</label>
+            <input type="number" id="project" th:field="*{project.id}" class="input-field" required>
         </div>
         <div class="button">
             <button type="submit">Create</button>

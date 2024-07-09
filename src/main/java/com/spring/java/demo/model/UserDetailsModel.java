@@ -21,12 +21,13 @@ public class UserDetailsModel {
     private int profileID;
     @Column(name = "DATE_OF_BIRTH")
     private Date dateOfBirth;
-    @Column(name = "GENDER_ID")
-    private int genderId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "GENDER_ID", nullable = false)
+    private GenderModel gender;
 
-    public UserDetailsModel(int profileID, Date dateOfBirth, int genderId) {
+    public UserDetailsModel(int profileID, Date dateOfBirth, GenderModel gender) {
         this.profileID = profileID;
         this.dateOfBirth = dateOfBirth;
-        this.genderId = genderId;
+        this.gender = gender;
     }
 }

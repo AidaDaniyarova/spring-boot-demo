@@ -2,35 +2,37 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create Project</title>
+    <title>Edit User</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
-    <h1>Create Project</h1>
-    <form th:action="@{/rest/admin/projects/createProject}" th:object="${newProject}" method="post">
+    <h1>Edit User</h1>
+    <form th:action="@{/rest/admin/users/editUser}" th:object="${userToEdit}" method="post">
+        <input type="hidden" th:field="*{id}">
         <div class="input-box">
-            <label for="projectName" class="details">Project Name:</label>
-            <input type="text" id="projectName" th:field="*{projectName}" class="input-field" required>
+            <label for="firstName" class="details">First Name:</label>
+            <input type="text" id="firstName" th:field="*{firstName}" class="input-field" required>
+        </div>
+
+        <div class="input-box">
+            <label for="lastName" class="details">Last Name:</label>
+            <input type="text" id="lastName" th:field="*{lastName}" class="input-field" required>
         </div>
         <div class="input-box">
-            <label for="description" class="details">Description:</label>
-            <textarea id="description" th:field="*{description}" class="input-field" required></textarea>
+            <label for="email" class="details">Email:</label>
+            <input type="text" id="email" th:field="*{email}" class="input-field">
         </div>
         <div class="input-box">
-            <label for="startDate" class="details">Start Date:</label>
-            <input type="text" id="startDate" th:field="*{startDate}" placeholder="dd.MM.yyyy" class="input-field" required>
+            <label for="phoneNumber" class="details">Phone number:</label>
+            <input type="number" id="phoneNumber" th:field="*{phoneNumber}" class="input-field" required>
         </div>
         <div class="input-box">
-            <label for="endDate" class="details">End Date:</label>
-            <input type="text" id="endDate" th:field="*{endDate}" placeholder="dd.MM.yyyy" class="input-field" required>
-        </div>
-        <div class="input-box">
-            <label for="status" class="details">Status ID:</label>
-            <input type="number" id="status" th:field="*{status.id}" class="input-field" required>
+            <label for="roles" class="details">Role:</label>
+            <input type="text" id="roles" th:field="*{roles}" class="input-field" required>
         </div>
         <div class="button">
-            <button type="submit">Create</button>
+            <button type="submit">Save Changes</button>
         </div>
     </form>
 </div>
@@ -45,8 +47,8 @@
         font-family: 'Poppins', sans-serif;
     }
     .container{
-        max-width: 1600px;
-        width: 80%;
+        max-width: 700px;
+        width: 100%;
         background-color: #fff;
         padding: 25px 30px;
         border-radius: 5px;

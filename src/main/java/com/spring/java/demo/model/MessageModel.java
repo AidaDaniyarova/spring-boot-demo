@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,22 +14,24 @@ import lombok.NoArgsConstructor;
 @Table(name = "MESSAGE")
 public class MessageModel {
     @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(name = "MESSAGE_TEXT")
-    private String message;
-    @Column(name = "TIME_SENT")
-    private String time;
-    @Column(name = "SENDER_ID")
-    private String senderID;
-    @Column(name = "RECEIVER_ID")
-    private String receiverID;
+    private String id;
+    private String chatId;
+    private String senderId;
+    private String recipientId;
+    private String senderName;
+    private String recipientName;
+    private String content;
+    private Date timestamp;
+   /* private MessageStatus status;*/
 
-    public MessageModel(String message, String time, String senderID, String receiverID) {
-        this.message = message;
-        this.time = time;
-        this.senderID = senderID;
-        this.receiverID = receiverID;
+    public MessageModel(String chatId, String senderId, String recipientId, String senderName, String recipientName, String content, Date timestamp/*, MessageStatus status*/) {
+        this.chatId = chatId;
+        this.senderId = senderId;
+        this.recipientId = recipientId;
+        this.senderName = senderName;
+        this.recipientName = recipientName;
+        this.content = content;
+        this.timestamp = timestamp;/*
+        this.status = status;*/
     }
 }

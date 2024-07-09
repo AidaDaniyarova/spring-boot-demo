@@ -1,9 +1,10 @@
 package com.spring.java.demo.controllers;
 
 import com.spring.java.demo.auth.JwtUtil;
-import com.spring.java.demo.model.UserModel;
+import com.spring.java.demo.model.*;
+import com.spring.java.demo.repositories.ProfileRepo;
 import com.spring.java.demo.repositories.UserRepo;
-import com.spring.java.demo.services.UserService;
+import com.spring.java.demo.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -22,9 +23,20 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
     private final UserRepo userRepository;
-
+    @Autowired
+    private ProfileService profileService;
+    @Autowired
+    private AddressService addressService;
+    @Autowired
+    private RolesService rolesService;
+    @Autowired
+    private DepartmentService departmentService;
+    @Autowired
+    private AssignmentService assignmentService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ProfileRepo profileRepo;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -51,7 +63,13 @@ public class AuthController {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles("USER");
         userService.createUser(user);
-        return "login_page"; // Redirect to registrationSuccess.html on successful registration
+        AddressModel address = addressService.getAddressById(1L).orElseThrow(() -> new IllegalArgumentException("Invalid address ID: "));
+        RolesModel role = rolesService.getRoleById(1L).orElseThrow(() -> new IllegalArgumentException("Invalid role ID: "));
+        AssignmentsModel assignment = assignmentService.getAssignmentById(1L).orElseThrow(() -> new IllegalArgumentException("Invalid assignment ID: "));
+        DepartmentModel department = departmentService.getDepartmentById(1L).orElseThrow(() -> new IllegalArgumentException("Invalid department ID: "));
+        ProfileModel profile = new ProfileModel(user, address, role, assignment, department);
+        profileService.createProfile(profile);
+        return "login_page";
     }
 
     @PostMapping("/login")
@@ -60,6 +78,8 @@ public class AuthController {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(email, password));
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            ProfileModel profile = profileService.getProfileByUserId(userRepository.findUserByEmail(email).getId());
+            model.addAttribute("profile", profile);
             if(userRepository.findUserByEmail(email).getRoles().equals("ADMIN")) {
                 return "admin_page"; // Redirect to loginSuccess.html on successful login
             }

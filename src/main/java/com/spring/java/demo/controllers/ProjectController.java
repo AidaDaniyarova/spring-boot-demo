@@ -50,8 +50,15 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/delete/{id}")
-    public String deleteProject(@PathVariable Long id) {
-        projectService.deleteProject(id);
+    public String deleteProject(@PathVariable Long id, Model model) {
+        try {
+            projectService.deleteProject(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("errorMessage", "Cannot delete project with ID " + id + " because it is referenced by another entity.");
+            return getProjectPage(model);
+        }
+
         return "redirect:/rest/admin/projects";
     }
 }

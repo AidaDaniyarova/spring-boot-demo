@@ -10,50 +10,44 @@
 <body>
 <div class="sidebar">
     <div class="logo-details">
-        <i class='bx bxl-c-plus-plus'></i>
+        <i class='bx bx-user-circle'></i>
         <span class="logo_name">Admin Panel</span>
     </div>
     <ul class="nav-links">
         <li>
-            <a href="#" class="active">
+            <a href="/rest/auth/login">
                 <i class='bx bx-grid-alt' ></i>
                 <span class="links_name">Dashboard</span>
             </a>
         </li>
         <li>
-            <a href="/rest/admin/projects">
+            <a href="/rest/admin/projects" class="active">
                 <i class='bx bx-box' ></i>
                 <span class="links_name">Projects</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="/rest/admin/assignments">
                 <i class='bx bx-list-ul' ></i>
-                <span class="links_name">Order list</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-pie-chart-alt-2' ></i>
-                <span class="links_name">Analytics</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-coin-stack' ></i>
                 <span class="links_name">Assignments</span>
             </a>
         </li>
         <li>
-            <a href="#">
-                <i class='bx bx-book-alt' ></i>
-                <span class="links_name">Employee</span>
+            <a href="/rest/admin/company">
+                <i class='bx bx-buildings' ></i>
+                <span class="links_name">Company</span>
             </a>
         </li>
         <li>
-            <a href="#">
-                <i class='bx bx-user' ></i>
-                <span class="links_name">Team</span>
+            <a href="/rest/admin/departments">
+                <i class='bx bx-building' ></i>
+                <span class="links_name">Department</span>
+            </a>
+        </li>
+        <li>
+            <a href="/rest/admin/users">
+                <i class='bx bx-message' ></i>
+                <span class="links_name">Employees</span>
             </a>
         </li>
         <li>
@@ -63,13 +57,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
-                <i class='bx bx-heart' ></i>
-                <span class="links_name">Favorites</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
+            <a href="/">
                 <i class='bx bx-cog' ></i>
                 <span class="links_name">Setting</span>
             </a>
@@ -101,15 +89,19 @@
 
     <div class="container">
         <h1>Projects</h1>
-        <table class="styled-table">
+        <div th:if="${errorMessage}" class="alert alert-danger">
+            <a href="#" class="close" onclick="this.parentElement.style.display='none';">&times;</a>
+            <p th:text="${errorMessage}"></p>
+        </div>
+        <table class="styled-table" id="dataTable">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Start date</th>
-                <th>End Date</th>
-                <th>Status ID</th>
+                <th class="sortable" onclick="sortTable(0, 'num')">ID<span class="arrow" id="arrow-0"></span></th>
+                <th class="sortable" onclick="sortTable(1, 'alpha')">Name<span class="arrow" id="arrow-1"></span></th>
+                <th class="sortable" onclick="sortTable(2, 'alpha')">Description<span class="arrow" id="arrow-2"></span></th>
+                <th class="sortable" onclick="sortTable(3, 'alpha')">Start date<span class="arrow" id="arrow-3"></span></th>
+                <th class="sortable" onclick="sortTable(4, 'alpha')">End Date<span class="arrow" id="arrow-4"></span></th>
+                <th class="sortable" onclick="sortTable(5, 'alpha')">Status<span class="arrow" id="arrow-5"></span></th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -120,7 +112,7 @@
                 <td th:text="${project.description}"></td>
                 <td th:text="${#dates.format(project.startDate, 'dd.MM.yyyy')}"></td>
                 <td th:text="${#dates.format(project.endDate, 'dd.MM.yyyy')}"></td>
-                <td th:text="${project.statusID}"></td>
+                <td th:text="${project.status.statusName}"></td>
                 <td>
                     <button class="edit-btn"><a th:href="@{|/rest/admin/projects/edit/${project.id}|}">Edit</a></button>
                     <button class="delete-btn" th:onclick="'confirmDelete(' + ${project.id} + ')'">Delete</button>
@@ -142,10 +134,73 @@
         }else
             sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
     }
+
+    let sortDirection = {};
+
+    function sortTable(columnIndex, type) {
+        const table = document.getElementById('dataTable');
+        const tbody = table.tBodies[0];
+        const rows = Array.from(tbody.rows);
+        const currentDirection = sortDirection[columnIndex] || 'asc';
+
+        rows.sort((rowA, rowB) => {
+            const cellA = rowA.cells[columnIndex].textContent;
+            const cellB = rowB.cells[columnIndex].textContent;
+
+            if (type === 'num') {
+                return currentDirection === 'asc'
+                    ? cellA - cellB
+                    : cellB - cellA;
+            } else if (type === 'alpha') {
+                return currentDirection === 'asc'
+                    ? cellA.localeCompare(cellB)
+                    : cellB.localeCompare(cellA);
+            }
+        });
+
+        sortDirection[columnIndex] = currentDirection === 'asc' ? 'desc' : 'asc';
+
+        // Clear all arrows
+        document.querySelectorAll('.arrow').forEach(arrow => arrow.textContent = '');
+
+        // Set the arrow for the current column
+        const arrow = document.getElementById('arrow-' + columnIndex);
+        arrow.textContent = sortDirection[columnIndex] === 'asc' ? '↑' : '↓';
+
+        rows.forEach(row => tbody.appendChild(row));
+    }
 </script>
 
 </body>
 <style>
+    /* General alert styles */
+    .alert {
+        padding: 20px;
+        margin-top: 50px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        position: relative;
+    }
+
+    /* Specific alert-danger styles */
+    .alert-danger {
+        color: #a94442;
+        background-color: #f2dede;
+        border-color: #ebccd1;
+    }
+
+    /* Close button for alerts */
+    .alert .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: inherit;
+        text-decoration: none;
+        font-size: 20px;
+        line-height: 20px;
+        cursor: pointer;
+    }
     /* Googlefont Poppins CDN Link */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
     *{
@@ -626,11 +681,10 @@
     .container {
         max-width: 1200px;
         margin: auto;
-        padding: 20px;
+        padding: 40px 20px 0px 30px;
         background-color: #f4f4f4;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin-top: 20px;
     }
     .container h1 {
         margin-bottom: 20px;
@@ -652,6 +706,19 @@
     }
     .styled-table th, .styled-table td {
         padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th.sortable {
+        cursor: pointer;
+    }
+    th.sortable:hover {
+        background-color: #007f65;
+    }
+    .arrow {
+        margin-left: 5px;
+        font-size: 12px;
     }
     .styled-table tbody tr {
         border-bottom: 1px solid #dddddd;
