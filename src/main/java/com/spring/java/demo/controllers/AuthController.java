@@ -62,13 +62,14 @@ public class AuthController {
     public String register(UserModel user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles("USER");
+        user.setPhoneNumber(user.getPhoneNumber());
         userService.createUser(user);
-        AddressModel address = addressService.getAddressById(1L).orElseThrow(() -> new IllegalArgumentException("Invalid address ID: "));
+        //AddressModel address = addressService.getAddressById(1L).orElseThrow(() -> new IllegalArgumentException("Invalid address ID: "));
         RolesModel role = rolesService.getRoleById(1L).orElseThrow(() -> new IllegalArgumentException("Invalid role ID: "));
         AssignmentsModel assignment = assignmentService.getAssignmentById(1L).orElseThrow(() -> new IllegalArgumentException("Invalid assignment ID: "));
         DepartmentModel department = departmentService.getDepartmentById(1L).orElseThrow(() -> new IllegalArgumentException("Invalid department ID: "));
-        ProfileModel profile = new ProfileModel(user, address, role, assignment, department);
-        profileService.createProfile(profile);
+        //ProfileModel profile = new ProfileModel(user, address, role, assignment, department);
+        //profileService.createProfile(profile);
         return "login_page";
     }
 

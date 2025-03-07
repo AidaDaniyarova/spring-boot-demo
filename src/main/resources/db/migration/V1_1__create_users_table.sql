@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS users
     last_name         VARCHAR(255) NOT NULL,
     occupation        VARCHAR(255),
     password          VARCHAR(255) NOT NULL,
+    phone_number      VARCHAR(255),
     profile_photo_url VARCHAR(255),
     role              VARCHAR(255)
     );
